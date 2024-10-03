@@ -104,7 +104,36 @@ int main()
 ////////////////////////////////////////////////////////////
 int balanced(char *expression)
 {
-/* add your code here */
+	/* add your code here */
+	Stack temp_stack;
+	temp_stack.ll.head = NULL;
+	temp_stack.ll.size = 0;
+
+	int string_idx = 0;
+	char current_char, compare_char;
+	do {
+		char current_char = expression[string_idx++];
+		if(current_char == '(' || current_char == '[' || current_char == '{')
+			push(&temp_stack, current_char);
+		else {
+			if(temp_stack.ll.size == 0)
+				return 1;
+			compare_char = pop(&temp_stack);
+			if(current_char == ')' && compare_char != '(')
+				return 1;
+
+			else if(current_char == ']' && compare_char != '[')
+				return 1;
+
+			else if(current_char == '}' && compare_char != '{')
+				return 1;
+		}
+	} while(expression[string_idx] != '\0');
+
+	if(temp_stack.ll.size == 0)
+		return 0;
+	else
+		return 1;
 }
 
 ////////////////////////////////////////////////////////////
