@@ -103,6 +103,23 @@ int main()
 int smallestValue(BTNode *node)
 {
 	/* add your code here */
+    const static int INT_MAX = 32767;
+    if(node == NULL)
+        return -1;
+
+    int ret = INT_MAX;
+    int left_smallest_value = smallestValue(node->left);
+    if(left_smallest_value == -1)
+        left_smallest_value = INT_MAX;
+    ret = ret < left_smallest_value ? ret : left_smallest_value;
+    
+    int right_smallest_value = smallestValue(node->right);
+    if(right_smallest_value == -1)
+        right_smallest_value = INT_MAX;
+    ret = ret < right_smallest_value ? ret : right_smallest_value;
+
+    ret = ret < node->item ? ret : node->item;
+    return ret;
 }
 
 //////////////////////////////////////////////////////////////////////////////////
