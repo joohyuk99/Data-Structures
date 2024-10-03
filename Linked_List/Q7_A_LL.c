@@ -88,26 +88,18 @@ int main()
 void RecursiveReverse(ListNode **ptrHead)
 {
 	/* add your code here */
-	int list_length = 0;
 	ListNode* current_node = *ptrHead;
-	while(current_node != NULL) {
-		current_node = current_node->next;
-		list_length++;
-	}
+	if(current_node == NULL || current_node->next == NULL)
+		return;
 
-	int* items = (int*)malloc(sizeof(int) * list_length);
-	int items_idx = 0;
-	current_node = *ptrHead;
-	while(current_node != NULL) {
-		items[items_idx++] = current_node->item;
+	while(current_node->next->next != NULL)
 		current_node = current_node->next;
-	}
 
-	current_node = *ptrHead;
-	while(current_node != NULL) {
-		current_node->item = items[--items_idx];
-		current_node = current_node->next;
-	}
+	current_node->next->next = *ptrHead;
+	*ptrHead = current_node->next;
+	current_node->next = NULL;
+
+	RecursiveReverse(&((*ptrHead)->next));
 
 	return;
 }
