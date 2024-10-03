@@ -89,7 +89,7 @@ void moveOddItemsToBack(LinkedList *ll)
 	/* add your code here */
 	int last_odd_add_idx = 0;
 	ListNode* temp_node = ll->head;
-	while(temp_node->item % 2 == 0) {
+	while(temp_node != NULL && temp_node->item % 2 == 0) {
 		temp_node = temp_node->next;
 		last_odd_add_idx++;
 	}
@@ -110,7 +110,6 @@ void moveOddItemsToBack(LinkedList *ll)
 			current_check_idx++;
 		}
 	}
-
 	return;
 }
 
